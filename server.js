@@ -26,10 +26,7 @@ app.get('/resources/:subfolder/:subsubfolder/:file', function (req, res) {
 
 
 //Routes
-app.use('/API/PostToWell/', require('./API/PostToWell'));
-app.use('/API/getNamesOfWits/', require('./API/getNamesOfWits'));
 app.use('/API/find/', require('./API/find'));
-app.use('/API/findAndModify/', require('./API/findAndModify'));
 app.use('/API/insert/', require('./API/insert'));
 app.use('/API/update/', require('./API/update'));
 app.use('/API/save/', require('./API/save'));
