@@ -6,14 +6,45 @@ var mongo = require('mongodb');
 var app = express();
 router.use(bodyParser.urlencoded({ extended: false }))
 router.post('/', function (req, res) {
-    bodyString = JSON.stringify(req.body);
-    res.send(`
+    var body = req.body.Body;
+    var type
+    body = body.toLowerCase()
+    var typeArrA = ['food', 'lift', 'burn']
+
+    function checkAllTypes(typeArr) {
+        typeArr.forEach(function (ta) {
+            checkType(ta)
+        })
+    } (typeArrA)
+
+    function checkType(t) {
+        if (body.includes(t)) setType(t)
+    }
+
+    function setType(t) {
+        if (type) onlyOne()
+        else type = t
+    }
+
+    function onlyOne() {
+        Send('You can only have one directive')
+    }
+
+    if (!type) Send('There is no directive')
+    else Send('The directive is: ' + type)
+
+
+    function Send(s) {
+        res.send(`
     <Response>
     <Message>
-The request Body is: ${bodyString}
+${s}
     </Message>
     </Response>
     `)
+    }
+
+
     // var col = req.body.collection
     // var db = req.body.database
     // var arg1 = req.body.arg1
@@ -28,4 +59,4 @@ The request Body is: ${bodyString}
 //API.find({database:'Raw', collection:'RawInstants_3_2017', arg1:{}})
 module.exports = router;
 
-///asd
+///
