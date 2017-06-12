@@ -15,8 +15,6 @@ function resp(text) {
     }
 
     return (protein && carbs && fat) ? 'protein: ' + protein + ', carbs: ' + carbs + ', fat: ' + fat : 'You didnt provide enough info'
-
-
 }
 
 module.exports.resp = resp;

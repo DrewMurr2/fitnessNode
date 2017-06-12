@@ -1,8 +1,6 @@
 function resp(text) {
     var textArr = text.split(' ')
-    var protein = firstNum(textArr)
-    var carbs = firstNum(textArr)
-    var fat = firstNum(textArr)
+    var calories = firstNum(textArr)
 
     function firstNum(arr) {
         for (i = 0; i < arr.length; i++) {
@@ -14,7 +12,7 @@ function resp(text) {
         }
     }
 
-    return (protein && carbs && fat) ? 'protein: ' + protein + ', carbs: ' + carbs + ', fat: ' + fat : 'You didnt provide enough info'
+    return (calories) ? 'calories: ' + calories : 'You didnt provide enough info'
 
 
 }
