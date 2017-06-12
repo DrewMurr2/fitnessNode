@@ -15,21 +15,22 @@ router.post('/', function (req, res) {
         if (body.includes(t)) type ? Send('You can only have one directive.') : type = t
     })
 
-    var respo
     if (!type) Send('There is no directive')
-    else switch (type) {
-        case 'food':
+    Send(require('../Logic/' + type).resp(body))
 
 
-        case 'lift':
-            respo = require('../Logic/lift').resp(body)
-
-        case 'burn':
+    // else switch (type) {
+    //     case 'food':
 
 
+    //     case 'lift':
+    //         Send(require('../Logic/lift').resp(body))
 
-    }
-    Send(respo)
+    //     case 'burn':
+
+
+
+    // }
 
     function Send(s) {
         res.send(`
