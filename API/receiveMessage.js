@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var mongo = require('mongodb');
 var app = express();
-router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: false }))
 router.post('/', function (req, res) {
     var From = req.body.From;
     var Bod = req.body.Body;
