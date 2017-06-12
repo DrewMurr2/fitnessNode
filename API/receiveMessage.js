@@ -6,7 +6,7 @@ var mongo = require('mongodb');
 var app = express();
 router.use(bodyParser.json())
 router.post('/', function (req, res) {
-    var bodyString = JSON.stringify(req.body.Body)
+    var bodyString = JSON.stringify(req)
     res.send(`
     <Response>
     <Message>
