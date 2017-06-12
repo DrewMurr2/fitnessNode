@@ -6,18 +6,36 @@ var mongo = require('mongodb');
 var app = express();
 router.use(bodyParser.urlencoded({ extended: false }))
 router.post('/', function (req, res) {
-    var body = req.body.Body;
-    var userDatabase = 'User_' + parseInt(req.body.From.replace('+', ''))
-    var type
-    body = body.toLowerCase()
-    var typeArr = ['food', 'lift', 'burn']
 
-    typeArr.forEach(function (t) {
-        if (body.includes(t)) type ? Send('You can only have one directive.') : type = t
+
+    var body = req.body.Body;
+    require('../Logic/find').find({ database: 'Operations', collection: 'Users', arg1: { numbers: req.body.From }, arg2: {} }, function (returnObject) {
+        var user = returnObject.results
+        user ? withUser(user) : noUser()
     })
 
-    if (!type) Send('There is no directive')
-    Send(require('../Logic/' + type).resp(body, userDatabase))
+
+    function withUser(user) {
+        Send(JSON.stringify(user))
+    }
+
+
+
+    function noUser() {
+        Send('You are not a user!')
+    }
+
+
+    // var type
+    // body = body.toLowerCase()
+    // var typeArr = ['food', 'lift', 'burn']
+
+    // typeArr.forEach(function (t) {
+    //     if (body.includes(t)) type ? Send('You can only have one directive.') : type = t
+    // })
+
+    // if (!type) Send('There is no directive')
+    // Send(require('../Logic/' + type).resp(body, userDatabase))
 
 
     function Send(s) {
