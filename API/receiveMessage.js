@@ -7,6 +7,7 @@ var app = express();
 router.use(bodyParser.urlencoded({ extended: false }))
 router.post('/', function (req, res) {
     var body = req.body.Body;
+    var userDatabase = 'User_' + parseInt(req.body.From.replace('+', ''))
     var type
     body = body.toLowerCase()
     var typeArr = ['food', 'lift', 'burn']
@@ -16,7 +17,7 @@ router.post('/', function (req, res) {
     })
 
     if (!type) Send('There is no directive')
-    Send(require('../Logic/' + type).resp(body))
+    Send(require('../Logic/' + type).resp(body, userDatabase))
 
 
     function Send(s) {
