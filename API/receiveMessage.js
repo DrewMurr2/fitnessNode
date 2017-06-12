@@ -9,27 +9,12 @@ router.post('/', function (req, res) {
     var body = req.body.Body;
     var type
     body = body.toLowerCase()
-    var typeArrA = ['food', 'lift', 'burn']
+    var typeArr = ['food', 'lift', 'burn']
 
-    function checkAllTypes(typeArr) {
-        typeArr.forEach(function (ta) {
-            checkType(ta)
-        })
-    }
+    typeArr.forEach(function (t) {
+        if (body.includes(t)) type ? Send('You can only have one directive.') : type = t
+    })
 
-    function checkType(t) {
-        if (body.includes(t)) setType(t)
-    }
-
-    function setType(t) {
-        if (type) onlyOne()
-        else type = t
-    }
-
-    function onlyOne() {
-        Send('You can only have one directive')
-    }
-    checkAllTypes(typeArrA)
     var respo
     if (!type) Send('There is no directive')
     else switch (type) {
