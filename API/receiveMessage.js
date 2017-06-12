@@ -19,19 +19,6 @@ router.post('/', function (req, res) {
     Send(require('../Logic/' + type).resp(body))
 
 
-    // else switch (type) {
-    //     case 'food':
-
-
-    //     case 'lift':
-    //         Send(require('../Logic/lift').resp(body))
-
-    //     case 'burn':
-
-
-
-    // }
-
     function Send(s) {
         res.send(`
     <Response>
