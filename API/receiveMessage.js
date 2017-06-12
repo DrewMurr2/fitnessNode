@@ -6,7 +6,14 @@ var mongo = require('mongodb');
 var app = express();
 router.use(bodyParser.json())
 router.post('/', function (req, res) {
-    res.send(req.body)
+    var bodyString = JSON.stringify(req.body)
+    res.send(`
+    <Response>
+    <Message>
+The request Body is: ${bodyString}
+    </Message>
+    </Response>
+    `)
     // var col = req.body.collection
     // var db = req.body.database
     // var arg1 = req.body.arg1
