@@ -10,7 +10,7 @@ router.post('/', function (req, res) {
     res.send(`
     <Response>
     <Message>
-The request Body is: ${bodyString}, From: ${From}
+The request Body is: ${bodyString}
     </Message>
     </Response>
     `)
