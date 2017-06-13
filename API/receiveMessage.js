@@ -17,7 +17,7 @@ router.post('/', function (req, res) {
 
     function withUser(user) {
         var type
-        user.directive.forEach(function (t) { if (body.includes(t)) type ? Send('You can only have one directive.') : type = t })
+        user.directives.forEach(function (t) { if (body.includes(t)) type ? Send('You can only have one directive.') : type = t })
         if (!type) Send('There is no directive')
         Send(require('../Logic/' + type).resp(body, user))
     }
