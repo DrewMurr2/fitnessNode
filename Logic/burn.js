@@ -1,8 +1,5 @@
-function resp(text, database) {
+function resp(text, user) {
     var textArr = text.split(' ')
-    var timeO = firstNum(testArr, 'time') || new Date()
-    var calories = firstNum(textArr)
-
     function firstNum(arr, after) {
         var afterExists = after ? false : true
         for (i = 0; i < arr.length; i++) {
@@ -15,9 +12,19 @@ function resp(text, database) {
         }
     }
 
-    if (calories) {
-        require('../Logic/Insert').insert({ Database: database, Collection: 'Burn', Obj: { time: timeO, burn: calories } })
-        return 'calories: ' + calories
+    var options = {
+        database: 'User_' + user._id,
+        collection: 'timedata',
+        Obj: {
+            burn: firstNum(testArr, 'burn'),
+            insertedTime: new Date(),
+            time: firstNum(testArr, 'time') || new Date(),
+        }
+    }
+
+    if (options.Obj.burn) {
+        require('../Logic/Insert').insert(options)
+        return 'calories: ' + options.Obj.burn
     } else return 'You didnt provide enough info'
 
 }

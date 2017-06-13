@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({ extended: false }))
 router.post('/', function (req, res) {
 
 
-    var body = req.body.Body;
+    var body = req.body.Body.toLowerCase();
     require('../Logic/find').find({ database: 'Operations', collection: 'Users', arg1: { numbers: req.body.From }, arg2: {} }, function (returnObject) {
         var user = returnObject.results
         user ? withUser(user) : noUser()
@@ -16,7 +16,10 @@ router.post('/', function (req, res) {
 
 
     function withUser(user) {
-        Send(JSON.stringify(user))
+        var type
+        user.directive.forEach(function (t) { if (body.includes(t)) type ? Send('You can only have one directive.') : type = t })
+        if (!type) Send('There is no directive')
+        Send(require('../Logic/' + type).resp(body, user))
     }
 
 
