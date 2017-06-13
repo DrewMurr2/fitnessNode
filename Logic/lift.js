@@ -1,5 +1,5 @@
 function resp(text, user) {
-    var textArr = text.split(' ')
+    var testArr = text.split(' ')
     function firstNum(arr, after) {
         var afterExists = after ? false : true
         for (i = 0; i < arr.length; i++) {
@@ -15,12 +15,12 @@ function resp(text, user) {
     function firstWord(arr, after) {
         var afterExists = after ? false : true
         for (i = 0; i < arr.length; i++) {
-            if (after && arr[i] == after) afterExists = true
             if (arr[i] != 'wrd' && afterExists) {
                 var newWord = arr[i]
                 arr[i] = 'wrd'
                 return newWord
             }
+            if (after && arr[i] == after) afterExists = true
         }
     }
 
@@ -28,17 +28,21 @@ function resp(text, user) {
         database: 'User_' + user._id,
         collection: 'timedata',
         Obj: {
+            insertedTime: new Date(),
+            time: firstNum(testArr, 'time') || new Date(),
             lift: firstWord(testArr, 'lift'),
             weight: firstNum(testArr, 'lift'),
             reps: firstNum(testArr, 'lift'),
         },
-        insertedTime: new Date(),
-        time: firstNum(testArr, 'time') || new Date(),
+
     }
+    console.log(options)
+    console.log(JSON.stringify(options))
+
 
     if (options.Obj.lift && options.Obj.weight && options.Obj.reps) {
         require('../Logic/Insert').insert(options)
-        return 'Inserted: ' + JSON.stringify(options.Obj.food)
+        return 'Inserted: ' + JSON.stringify(options.Obj)
     } else return 'You didnt provide enough info'
 
 

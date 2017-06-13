@@ -9,7 +9,7 @@ function insert(options) {
     })
 }
 
-
+module.exports.insert = insert;
 
 
 

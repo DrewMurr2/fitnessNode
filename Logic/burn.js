@@ -1,5 +1,5 @@
 function resp(text, user) {
-    var textArr = text.split(' ')
+    var testArr = text.split(' ')
     function firstNum(arr, after) {
         var afterExists = after ? false : true
         for (i = 0; i < arr.length; i++) {

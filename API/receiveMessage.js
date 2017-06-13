@@ -11,7 +11,7 @@ router.post('/', function (req, res) {
     var body = req.body.Body.toLowerCase();
     require('../Logic/find').find({ database: 'Operations', collection: 'Users', arg1: { numbers: req.body.From }, arg2: {} }, function (returnObject) {
         var user = returnObject.results
-        user ? withUser(user) : noUser()
+        user ? withUser(user[0]) : noUser()
     })
 
 
@@ -19,7 +19,7 @@ router.post('/', function (req, res) {
         var type
         user.directives.forEach(function (t) { if (body.includes(t)) type ? Send('You can only have one directive.') : type = t })
         if (!type) Send('There is no directive')
-        Send(require('../Logic/' + type).resp(body, user))
+        else Send(require('../Logic/' + type).resp(body, user))
     }
 
 
