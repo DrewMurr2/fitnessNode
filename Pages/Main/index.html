@@ -25,6 +25,14 @@
         </form>
         <button type="button" class="btn" onClick="parseFromParsePachage(message.value)">Basic</button>
     </div>
+
+    <div class="container" id="LogicWorker">
+        <script>
+            if (parsePackage) {
+
+            }
+        </script>
+    </div>
 </body>
 <script>
     var parsePackage = new operation({
@@ -57,44 +65,52 @@
             var left = thisOperation.left || (optns ? optns.left : Mainstring)
             var right = thisOperation.right || (optns ? optns.right : undefined)
             var operator = thisOperation.operator
+            return thisOperation[operator](left, right)
+
+            // switch (operator) {
+            //     //********   BOOLEANS    *************
+
+            //     case 'contains':
+            //         return thenElse(left.includes(right))
+
+            //     case 'equals':
+            //         return thenElse(left == right)
 
 
-            switch (operator) {
-                //********   BOOLEANS    *************
+            //     //********   FUNCTIONS    *************
 
-                case 'contains':
-                    return thenElse(left.includes(right))
+            //     case 'split':
+            //         return left.split(right)
+            //     case 'of':
+            //         return left[right]
 
-                case 'equals':
-                    return thenElse(left == right)
+            //     //********   ACTIONS    *************
+            //     case 'setEquals':
+            //         left = right
+            //     case 'alert':
+            //         return alert(left)
+
+            //     case 'post':
+            //         post(left, right)
+
+            // }
+
+            // function post(lt, rt) {
+            //     alert(lt + rt)
+            // }
 
 
-                //********   FUNCTIONS    *************
 
-                case 'split':
-                    return left.split(right)
-                case 'of':
-                    return left[right]
-
-                //********   ACTIONS    *************
-                case 'setEquals':
-                    left = right
-                case 'alert':
-                    alert(left)
-                case 'post':
-                    post(left, right)
-
-            }
-
-            function post(lt, rt) {
-                alert(lt + rt)
-            }
-
-            function thenElse(result) {
-                if (result) thisOperation.then.forEach(function (act) { act.exec() })
-                else thisOperation.else.forEach(function (act) { act.exec() })
-            }
-
+        }
+        this.thenElse = function (result) {
+            if (result) thisOperation.then.forEach(function (act) { act.exec() })
+            else thisOperation.else.forEach(function (act) { act.exec() })
+        }
+        this.alert = function (left, right) {
+            alert(left + ":" + right)
+        }
+        this.contains = function (left, right) {
+            thisOperation.thenElse(left.includes(right))
         }
 
     }
